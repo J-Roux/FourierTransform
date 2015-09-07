@@ -35,7 +35,7 @@ namespace FourierLab1
 
 
             var startTimeFFT = DateTime.Now;
-            var directFFT = FFT.DecimationInFrequency(X);
+            var directFFT = FFT.DecimationInTime(X);
             this.textBox2.Text = (DateTime.Now - startTimeFFT).ToString();
 
 
