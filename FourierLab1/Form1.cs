@@ -15,14 +15,14 @@ namespace FourierLab1
     public partial class Form1 : Form
     {
 
-        private int N = (int)Math.Pow(2, 10);
+        private int N = (int)Math.Pow(2, 6);
 
         public Form1()
         {
             InitializeComponent();
             SetChartType();
 
-            var X = SequenceGen.Generate(N, 0.1, x => Math.Sin(3 * x.Real) + Math.Cos(x.Real));
+            var X = SequenceGen.Generate(N, 0.5, x => Math.Sin(2 * x.Real) + Math.Cos(7 * x.Real));
             DrawGraph(X.Select(x => x.Real).ToArray(), chart1);
 
             var startTimeDFT = DateTime.Now;
@@ -36,11 +36,12 @@ namespace FourierLab1
 
             var startTimeFFT = DateTime.Now;
             var directFFT = FFT.DecimationInTime(X);
+            directFFT.Reverse();
             this.textBox2.Text = (DateTime.Now - startTimeFFT).ToString();
 
 
-            DrawGraph(directFFT.Select(x => x.Magnitude).ToArray(), chart5);
-            DrawGraph(directFFT.Select(x => x.Phase).ToArray(), chart6);
+            DrawGraph(directFFT.Select(x => x.Real ).ToArray(), chart5);
+            DrawGraph(directFFT.Select(x => x.Imaginary).ToArray(), chart6);
 
                         
         }
